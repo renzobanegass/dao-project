@@ -147,3 +147,71 @@ Governance: 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0
 
 Deployment addresses saved to: /deployments/sepolia.json
 ```
+
+## Contract Verification
+
+After deploying contracts to a testnet, you can verify them on block explorers using the verification script.
+
+### Automated Verification
+
+**Verify all contracts automatically:**
+```bash
+npx hardhat run scripts/verify.ts --network <network-name>
+```
+
+**Examples:**
+```bash
+# Verify on Polygon Mumbai
+npx hardhat run scripts/verify.ts --network polygonMumbai
+
+# Verify on Sepolia
+npx hardhat run scripts/verify.ts --network sepolia
+
+# Verify on Arbitrum Goerli
+npx hardhat run scripts/verify.ts --network arbitrumGoerli
+```
+
+The verification script will:
+1. Read deployment addresses from `/deployments/<network>.json`
+2. Verify all three contracts in the correct order
+3. Handle constructor arguments automatically
+4. Display verification status and explorer links
+
+### Manual Verification
+
+If you need to verify contracts manually, use these commands:
+
+**MyToken (no constructor arguments):**
+```bash
+npx hardhat verify --network polygonMumbai <MyToken-address>
+```
+
+**Staking (requires token address):**
+```bash
+npx hardhat verify --network polygonMumbai <Staking-address> <MyToken-address>
+```
+
+**Governance (requires staking address and quorum):**
+```bash
+npx hardhat verify --network polygonMumbai <Governance-address> <Staking-address> 2000
+```
+
+### Complete Deployment & Verification Workflow
+
+**Example for Polygon Mumbai:**
+```bash
+# 1. Deploy contracts
+npx hardhat run scripts/deploy.ts --network polygonMumbai
+
+# 2. Verify contracts
+npx hardhat run scripts/verify.ts --network polygonMumbai
+```
+
+**Example for Sepolia:**
+```bash
+# 1. Deploy contracts
+npx hardhat run scripts/deploy.ts --network sepolia
+
+# 2. Verify contracts
+npx hardhat run scripts/verify.ts --network sepolia
+```
