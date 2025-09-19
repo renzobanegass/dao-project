@@ -73,3 +73,77 @@ npx hardhat coverage
 ```bash
 npx hardhat test --network localhost
 ```
+
+## Deployment
+
+The project includes a deployment script that deploys all contracts in the correct order and saves deployment addresses.
+
+### Local Deployment
+
+**Deploy to Hardhat network:**
+```bash
+npx hardhat run scripts/deploy.ts --network hardhat
+```
+
+**Deploy to localhost (requires running node):**
+```bash
+# Terminal 1: Start local node
+npx hardhat node
+
+# Terminal 2: Deploy contracts
+npx hardhat run scripts/deploy.ts --network localhost
+```
+
+### Testnet Deployment
+
+**Deploy to Sepolia:**
+```bash
+npx hardhat run scripts/deploy.ts --network sepolia
+```
+
+**Deploy to Polygon Mumbai:**
+```bash
+npx hardhat run scripts/deploy.ts --network polygonMumbai
+```
+
+**Deploy to Arbitrum Goerli:**
+```bash
+npx hardhat run scripts/deploy.ts --network arbitrumGoerli
+```
+
+**Deploy to Optimism Goerli:**
+```bash
+npx hardhat run scripts/deploy.ts --network optimismGoerli
+```
+
+### Deployment Output
+
+The deployment script will:
+1. Deploy MyToken contract
+2. Deploy Staking contract (linked to MyToken)
+3. Deploy Governance contract (linked to Staking)
+4. Display all deployed addresses
+5. Save deployment info to `/deployments/<network>.json`
+
+**Example deployment output:**
+```
+Deploying contracts with the account: 0x...
+Network: sepolia
+Chain ID: 11155111
+
+1. Deploying MyToken...
+MyToken deployed to: 0x5FbDB2315678afecb367f032d93F642f64180aa3
+
+2. Deploying Staking...
+Staking deployed to: 0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512
+
+3. Deploying Governance...
+Governance deployed to: 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0
+
+=== Deployment Summary ===
+MyToken: 0x5FbDB2315678afecb367f032d93F642f64180aa3
+Staking: 0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512
+Governance: 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0
+
+Deployment addresses saved to: /deployments/sepolia.json
+```
