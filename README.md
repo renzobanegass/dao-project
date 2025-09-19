@@ -44,3 +44,32 @@ A Solidity + Next.js DAO demo project built with Hardhat and TypeScript.
 - `npm run coverage` - Generate test coverage report
 - `npm run deploy` - Deploy contracts
 - `npm run start:frontend` - Start frontend development server
+
+## Testing
+
+**Run all tests:**
+```bash
+npx hardhat test
+```
+
+**Run specific test file:**
+```bash
+npx hardhat test test/token.test.ts
+npx hardhat test test/staking.test.ts
+npx hardhat test test/governance.test.ts
+```
+
+**Run tests with gas reporting:**
+```bash
+REPORT_GAS=true npx hardhat test
+```
+
+**Run tests with coverage:**
+```bash
+npx hardhat coverage
+```
+
+**Run tests on specific network:**
+```bash
+npx hardhat test --network localhost
+```
